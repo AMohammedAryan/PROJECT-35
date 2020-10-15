@@ -1,43 +1,33 @@
-var milkBottle;
-
-function preLoad(){
-
-    milkBottle = loadImage("images/Milk.png");
-}
-
 class Food{
 
     constructor(){
 
-        var lastFed;
-        var foodStock;
+        this.lastFed;
+        this.foodStock;
+
+        this.image = loadImage("images/Milk.png");
     }
 
-    getFoodStock(){
+    display(){
+       
+        this.x = 80, this.y = 50;
 
-        foodStockData = database.ref('Food');
-        foodStockData.on("value", updateFoodStock);
+        imageMode(CENTER);
+        image(this.image, 120, 350, 70, 70);
 
-        foodStock = data.val();
+        if(foodStock!== 0){
+
+            for(var i = 0; i < this.foodStock; i++){
+
+                if(i%10 === 0){
+
+                    this.x = 80;
+                    this.y = this.y + 60;
+                }
+
+                image(this.image, this.x, this.y, 70, 70);
+                this.x = this.x + 30;
+            }
+        }
     }
-
-    updateFoodStock(a){
-
-        database.ref('Food').update({
-
-            Food: Food + a
-        })
-    }
-
-    deductFood(){
-
-        database.ref('Food').update({
-
-            Food: Food - 1
-        })
-    }
-}
-
-display(){
-    image(milkBottle, 50, 50, 50, 50);
 }
