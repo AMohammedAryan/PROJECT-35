@@ -54,9 +54,24 @@ function draw() {
   feedButton.mousePressed(feedDog);
   addFoodButton.mousePressed(addFood);
 
+  fill(255, 255, 254);
+  textSize(25);
+
+  console.log(lastFed);
+
+  if(lastFed >= 12){
+
+    text("Last Feed : " + lastFed % 12 + " PM", 10, 450);
+  } else if(lastFed === 0){
+
+    text("Last Feed : 12 AM", 10, 470);
+  } else{
+
+    text("Last Feed : " + lastFed + " AM", 10, 450);
+  }
+
   drawSprites();
   //add styles here
-
 }
 
 function readFoodStock(data){
@@ -73,8 +88,8 @@ function feedDog(){
 
   database.ref('/').update({
 
-    Food: foodObj.foodStock
-    //feedTime: hour()
+    Food: foodObj.foodStock,
+    feedTime: hour()
   })
 }
 
